@@ -1,6 +1,15 @@
-# py-looker-tools
-tools for Looker devs built in python 
+# Python Looker Tools 
+`tools for Looker devs built in python``
 
+Please feel free to raise PRs that will provide added functionality 
+* Add new functions into the `scripts` directory 
+* Please ensure your functions have doc strings 
+* If you have used/modified somebody else's code please give them due credit 
+* Code is formatted using the default parameters in `black`
+
+
+
+## How to test functions
 You will require a `looker.ini` which needs to contain
 ```
 [Looker]
