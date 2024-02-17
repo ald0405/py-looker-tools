@@ -1,0 +1,39 @@
+import looker_sdk
+from looker_sdk import models
+import os
+import json
+
+sdk = looker_sdk.init40()
+
+    def check_schedule_failures(days: int) -> dict:
+        """This function prints a list of schedules that have failed in the past day.
+                This has been taken from the brilliant Henry package but be re-created with
+                a bit of flexibility
+
+                Parameters:
+                days (int): The number of days to look in the past.
+
+                Returns:
+                A dictionary of failed schedules, where the keys are the names of the schedules and the values are the counts
+        of failures.
+        """
+        num_days = str(days) + " days"
+
+        if days < 0:
+            raise ValueError("days must be a non negative integer.")
+
+        print(f"\bTest for failing schedules {days} day(s)")
+        request = models.WriteQuery(
+            model="i__looker",
+            view="scheduled_plan",
+            fields=["scheduled_job.name", "scheduled_job.count"],
+            filters={
+                "scheduled_job.created_date": num_days,
+                "scheduled_job.status": "failure",
+            },
+            sorts=["scheduled_job.count desc"],
+            limit=500,
+        )
+        result = sdk.run_inline_query("json", request)
+        self.failed_schedules = json.loads(result)
+        print(json.dumps(self.failed_schedules, indent=4))
