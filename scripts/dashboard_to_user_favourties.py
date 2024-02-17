@@ -37,7 +37,5 @@ def add_dashboards_to_users(dashboard_id: str, users_id: list):
 
   return (f"Successfully {sdk.dashboard(dashboard_id=dashboard_id)['title']} added!")
 
-# You can either change the parameter directly, or upload files to Google Colab and use open() and read() to read data 
-from files
 add_dashboards_to_users(dashboard_id = "290", users_id = [28])
 
