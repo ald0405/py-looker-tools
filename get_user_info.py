@@ -1,7 +1,7 @@
-
 import pandas as pd
-import looker_sdk 
+import looker_sdk
 from looker_sdk import models
+
 
 def get_users() -> pd.DataFrame:
     """
@@ -22,27 +22,26 @@ def get_users() -> pd.DataFrame:
             - 'is_disabled': A boolean indicating whether the user account is disabled.
 
     Example:
-        >>> df = get_users()
-"""
-    
+        >>> df = get_users()"""
+
     # Prepare data for DataFrame
     data = []
 
-        # Fetch all users
+    # Fetch all users
     users = sdk.all_users()
     for user in users:
         user_data = {
-            'looker_user_id': user.id,
-            'first_name': user.first_name,
-            'last_name': user.last_name,
-            'email': user.email,
-            'roles': ', '.join(map(str, user.role_ids)),
-            'groups': ', '.join(map(str, user.group_ids)),
-            'is_disabled' : user.is_disabled,
+            "looker_user_id": user.id,
+            "first_name": user.first_name,
+            "last_name": user.last_name,
+            "email": user.email,
+            "roles": ", ".join(map(str, user.role_ids)),
+            "groups": ", ".join(map(str, user.group_ids)),
+            "is_disabled": user.is_disabled,
         }
         data.append(user_data)
 
     # Create a pandas DataFrame
     df = pd.DataFrame(data)
-    
+
     return df
